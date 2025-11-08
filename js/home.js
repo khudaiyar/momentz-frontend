@@ -1,4 +1,4 @@
-const API_URL = "https://momentzz.onrender.com/api";
+const API_URL = "https://momentzz.onrender.com";
 
 
 // Get authentication data
