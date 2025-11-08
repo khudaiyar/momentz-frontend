@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Momentz - Share Your Moments</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Animated Background Stickers -->
+<div class="falling-stickers"></div>
+
+<!-- Logos directly on the page -->
+<div class="logo-container">
+    <div class="logo-m">
+        <img src="/images/m-logo.png" alt="M Logo">
+    </div>
+    <div class="logo-momentz">
+        <img src="/images/momentz-logo.png" alt="Momentz Logo">
+    </div>
+</div>
+
+
+<div class="login-container">
+    <!-- Left Section - Your Photos -->
+    <div class="left-section">
+        <div class="photo-container">
+            <img id="mainPhoto" src="/images/photo1.jpg" alt="Your Photo" onerror="this.src='https://via.placeholder.com/600x800/667eea/ffffff?text=Add+Your+Photo'">
+        </div>
+    </div>
+
+    <!-- Right Section - Login Form -->
+    <div class="right-section">
+        <div class="login-box">
+            <h1 class="app-title">Let’s Make Some Moments</h1>
+
+            <form id="loginForm" class="auth-form">
+                <input type="text" id="loginUsername" placeholder="Username or email" required autocomplete="username">
+                <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password">
+                <button type="submit" class="btn-login">Log in</button>
+            </form>
+
+            <div class="divider">
+                <div class="divider-line"></div>
+                <span class="divider-text">OR</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot password?</a>
+        </div>
+
+        <div class="signup-box">
+            <p>Don't have an account? <button id="showRegister" class="link-btn">Sign up</button></p>
+        </div>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 class="modal-title">Create Account</h2>
+        <p class="modal-subtitle">Sign up to see photos and videos from your friends.</p>
+
+        <form id="registerForm" class="auth-form">
+            <input type="email" id="registerEmail" placeholder="Email" required autocomplete="email">
+            <input type="text" id="registerFullName" placeholder="Full Name" autocomplete="name">
+            <input type="text" id="registerUsername" placeholder="Username" required autocomplete="username">
+            <input type="password" id="registerPassword" placeholder="Password" minlength="6" required autocomplete="new-password">
+            <button type="submit" class="btn-login">Sign up</button>
+        </form>
+
+        <p class="terms">By signing up, you agree to our Terms & Privacy Policy.</p>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div id="forgotPasswordModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="lock-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        <h2>Trouble logging in?</h2>
+        <p class="forgot-text">Enter your email or username and we'll send you a link.</p>
+
+        <form id="forgotPasswordForm" class="auth-form">
+            <input type="text" id="forgotEmailUsername" placeholder="Email or Username" required>
+            <button type="submit" class="btn-login">Send login link</button>
+        </form>
+    </div>
+</div>
+
+<!-- Loading -->
+<div id="loading" class="loading-overlay">
+    <div class="spinner"></div>
+</div>
+
+<script src="/js/auth.js"></script>
+<script src="/js/animations.js"></script>
+</body>
+</html>

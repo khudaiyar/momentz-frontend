@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Profile - Momentz</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <img src="/images/m-logo.png" alt="Momentz" class="nav-logo" style="width: 60px; height: 60px;" onerror="this.style.display='none'">
+        </div>
+
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search">
+        </div>
+
+        <div class="nav-icons">
+            <a href="/home.html" class="nav-icon" title="Home">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="#" class="nav-icon" title="Messages">
+                <i class="far fa-paper-plane"></i>
+            </a>
+            <button id="createPostBtn" class="nav-icon" title="Create Post">
+                <i class="far fa-plus-square"></i>
+            </button>
+            <a href="#" class="nav-icon" title="Explore">
+                <i class="far fa-compass"></i>
+            </a>
+            <a href="#" class="nav-icon" title="Notifications">
+                <i class="far fa-heart"></i>
+            </a>
+            <a href="/profile.html" class="nav-icon active" title="Profile">
+                <i class="fas fa-user-circle"></i>
+            </a>
+            <!-- Theme Toggle Button -->
+            <button id="themeToggle" class="nav-icon theme-toggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Profile Content -->
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-pic-section">
+            <img id="profilePicture" src="https://ui-avatars.com/api/?name=User&background=0095f6&color=fff&size=150" alt="Profile" class="profile-pic-large">
+            <button id="changePhotoBtn" class="change-photo-btn">
+                <i class="fas fa-camera"></i>
+            </button>
+        </div>
+
+        <div class="profile-info-section">
+            <div class="profile-top">
+                <h2 id="profileUsername">username</h2>
+                <button id="editProfileBtn" class="btn-edit">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </button>
+                <button id="settingsBtn" class="btn-icon">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="postsCount">0</span>
+                    <span class="stat-label">posts</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="followersCount">0</span>
+                    <span class="stat-label">followers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="followingCount">0</span>
+                    <span class="stat-label">following</span>
+                </div>
+            </div>
+
+            <div class="profile-bio">
+                <h3 id="profileFullName">Full Name</h3>
+                <p id="profileBio">Bio goes here</p>
+                <a id="profileWebsite" href="#" target="_blank" style="display: none;">
+                    <i class="fas fa-link"></i> <span id="websiteText"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Tabs -->
+    <div class="profile-tabs">
+        <button class="tab-btn active" data-tab="posts">
+            <i class="fas fa-th"></i> POSTS
+        </button>
+        <button class="tab-btn" data-tab="saved">
+            <i class="far fa-bookmark"></i> SAVED
+        </button>
+        <button class="tab-btn" data-tab="tagged">
+            <i class="far fa-user"></i> TAGGED
+        </button>
+    </div>
+
+    <!-- Profile Posts Grid -->
+    <div class="profile-posts" id="profilePostsGrid">
+        <!-- Posts will load here -->
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div id="editProfileModal" class="modal">
+    <div class="modal-content edit-modal">
+        <div class="modal-header">
+            <h3>Edit Profile</h3>
+            <span class="close">&times;</span>
+        </div>
+        <form id="editProfileForm">
+            <div class="form-group">
+                <label>Profile Picture</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button type="button" id="uploadFromDevice" class="btn-upload" style="flex: 1; padding: 12px; background: var(--primary-accent); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-camera"></i> Upload from Device
+                    </button>
+                </div>
+                <input type="text" id="editProfilePicture" placeholder="Or paste image URL here" style="margin-top: 10px;">
+                <small>Upload from your device or paste an image URL</small>
+                <div id="profilePicturePreview" style="margin-top: 10px; display: none;">
+                    <img src="" alt="Preview" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-accent);">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="editUsername" disabled>
+                <small>Username cannot be changed</small>
+            </div>
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="editFullName" placeholder="Your full name" maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label>Bio</label>
+                <textarea id="editBio" placeholder="Tell us about yourself..." rows="4" maxlength="500"></textarea>
+                <small><span id="bioCharCount">0</span>/500 characters</small>
+            </div>
+
+            <div class="form-group">
+                <label>Website</label>
+                <input type="url" id="editWebsite" placeholder="https://yourwebsite.com">
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="editEmail" disabled>
+                <small>Email cannot be changed</small>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" onclick="document.getElementById('editProfileModal').style.display='none'">Cancel</button>
+                <button type="submit" class="btn-save">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Create Post Modal (same as home.html) -->
+<div id="createPostModal" class="modal">
+    <div class="modal-content post-modal">
+        <div class="modal-header">
+            <h3>Create New Post</h3>
+            <span class="close">&times;</span>
+        </div>
+        <form id="createPostForm">
+            <div class="upload-section">
+                <div id="uploadArea" class="upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag photo here</p>
+                    <button type="button" id="selectImageBtn" class="select-btn">Select from computer</button>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                </div>
+                <div id="imagePreview" class="image-preview" style="display: none;">
+                    <img id="previewImg" src="" alt="Preview">
+                    <button type="button" id="removeImage" class="remove-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <textarea id="postCaption" placeholder="Write a caption..." rows="4"></textarea>
+            <button type="submit" class="btn-post">Share Post</button>
+        </form>
+    </div>
+</div>
+
+<!-- Settings Modal -->
+<div id="settingsModal" class="modal">
+    <div class="modal-content settings-modal">
+        <div class="modal-header">
+            <h3>Settings</h3>
+            <span class="close">&times;</span>
+        </div>
+        <div class="settings-list">
+            <button class="setting-item">
+                <i class="fas fa-lock"></i> Change Password
+            </button>
+            <button class="setting-item">
+                <i class="fas fa-shield-alt"></i> Privacy & Security
+            </button>
+            <button class="setting-item">
+                <i class="fas fa-bell"></i> Notifications
+            </button>
+            <button class="setting-item" id="themeSettingBtn">
+                <i class="fas fa-moon"></i> Dark Mode
+            </button>
+            <button class="setting-item danger" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Loading -->
+<div id="loading" class="loading-overlay">
+    <div class="spinner"></div>
+</div>
+
+<script src="/js/profile.js"></script>
+</body>
+</html>

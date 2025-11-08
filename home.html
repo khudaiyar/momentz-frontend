@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Momentz - Home</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <img src="/images/m-logo.png" alt="Momentz" class="nav-logo" style="width: 60px; height: 60px;" onerror="this.style.display='none'">
+        </div>
+
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search">
+        </div>
+
+        <div class="nav-icons">
+            <a href="/home.html" class="nav-icon active" title="Home">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="#" class="nav-icon" title="Messages">
+                <i class="far fa-paper-plane"></i>
+            </a>
+            <button id="createPostBtn" class="nav-icon" title="Create Post">
+                <i class="far fa-plus-square"></i>
+            </button>
+            <a href="#" class="nav-icon" title="Explore">
+                <i class="far fa-compass"></i>
+            </a>
+            <a href="#" class="nav-icon" title="Notifications">
+                <i class="far fa-heart"></i>
+            </a>
+            <button id="profileBtn" class="nav-icon" title="Profile">
+                <i class="far fa-user-circle"></i>
+            </button>
+            <!-- Theme Toggle Button -->
+            <button id="themeToggle" class="nav-icon theme-toggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="feed-section">
+        <!-- Stories -->
+        <div class="stories-container">
+            <div class="story-item add-story">
+                <div class="story-avatar">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <span>Your story</span>
+            </div>
+        </div>
+
+        <!-- Posts Feed -->
+        <div id="feedContainer" class="posts-feed">
+            <!-- Posts will load here -->
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="profile-card">
+            <img id="sidebarAvatar" src="https://ui-avatars.com/api/?name=User&background=0095f6&color=fff&size=128" alt="Profile" class="profile-avatar">
+            <div class="profile-info">
+                <h3 id="sidebarUsername">Loading...</h3>
+                <p id="sidebarFullName">Welcome back!</p>
+            </div>
+            <button id="editProfileBtn" class="edit-btn">Edit Profile</button>
+        </div>
+
+        <div class="suggestions-section">
+            <div class="section-header">
+                <h4>Suggestions For You</h4>
+                <button class="see-all">See All</button>
+            </div>
+            <div id="suggestionsContainer" class="suggestions-list">
+                <!-- Suggestions will load here -->
+            </div>
+        </div>
+
+        <button id="logoutBtn" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+
+        <footer class="sidebar-footer">
+            <p>&copy; 2024 Momentz by Hudayyar</p>
+        </footer>
+    </aside>
+</div>
+
+<!-- Create Post Modal -->
+<div id="createPostModal" class="modal">
+    <div class="modal-content post-modal">
+        <div class="modal-header">
+            <h3>Create New Post</h3>
+            <span class="close">&times;</span>
+        </div>
+        <form id="createPostForm">
+            <div class="upload-section">
+                <div id="uploadArea" class="upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag photo here</p>
+                    <button type="button" id="selectImageBtn" class="select-btn">Select from computer</button>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                </div>
+                <div id="imagePreview" class="image-preview" style="display: none;">
+                    <img id="previewImg" src="" alt="Preview">
+                    <button type="button" id="removeImage" class="remove-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <textarea id="postCaption" placeholder="Write a caption..." rows="4"></textarea>
+            <button type="submit" class="btn-post">Share Post</button>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div id="editProfileModal" class="modal">
+    <div class="modal-content profile-modal">
+        <div class="modal-header">
+            <h3>Edit Profile</h3>
+            <span class="close">&times;</span>
+        </div>
+        <form id="editProfileForm">
+            <div class="form-group">
+                <label>Profile Picture URL</label>
+                <input type="url" id="editProfilePicture" placeholder="Enter image URL">
+            </div>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="editFullName" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+                <label>Bio</label>
+                <textarea id="editBio" placeholder="Tell us about yourself" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Website</label>
+                <input type="url" id="editWebsite" placeholder="https://yourwebsite.com">
+            </div>
+            <button type="submit" class="btn-post">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<!-- Post Detail Modal -->
+<div id="postDetailModal" class="modal">
+    <div class="modal-content detail-modal">
+        <span class="close">&times;</span>
+        <div class="detail-container">
+            <div class="detail-image">
+                <img id="detailImage" src="" alt="Post">
+            </div>
+            <div class="detail-sidebar">
+                <div class="detail-header">
+                    <img id="detailAvatar" src="" alt="User">
+                    <span id="detailUsername">username</span>
+                    <button id="detailDeleteBtn" class="delete-btn" style="display: none;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="detail-caption">
+                    <img id="detailAvatar2" src="" alt="User">
+                    <div>
+                        <strong id="detailUsername2">username</strong>
+                        <span id="detailCaptionText">Caption here</span>
+                    </div>
+                </div>
+                <div id="commentsContainer" class="comments-list">
+                    <!-- Comments will load here -->
+                </div>
+                <div class="detail-actions">
+                    <div class="action-buttons">
+                        <button id="detailLikeBtn" class="action-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="action-btn">
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button class="action-btn">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p id="detailLikes" class="likes-text">0 likes</p>
+                    <p id="detailTime" class="time-text">Just now</p>
+                </div>
+                <div class="add-comment">
+                    <input type="text" id="commentInput" placeholder="Add a comment...">
+                    <button id="postCommentBtn" class="post-btn">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading -->
+<div id="loading" class="loading-overlay">
+    <div class="spinner"></div>
+</div>
+
+<script src="/js/home.js"></script>
+</body>
+</html>
