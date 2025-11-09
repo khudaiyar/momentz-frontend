@@ -1,4 +1,4 @@
-const API_URL = "https://momentz-4l9o.onrender.com/api";
+const API_URL = "https://momentz-nrfh.onrender.com/api";
 const token = localStorage.getItem('token');
 const currentUserId = localStorage.getItem('userId');
 const currentUsername = localStorage.getItem('username');
